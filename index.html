@@ -350,6 +350,32 @@
   .report-summary strong {
     color: var(--primary);
   }
+  /* Tambahan untuk output suara */
+  .voice-output {
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+    text-align: left;
+    font-size: 1.01rem;
+    color: #0d6efd;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .voice-output button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    border-radius: 0.7rem;
+    padding: 0.3rem 0.9rem;
+    font-size: 1.01rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-left: 0.2rem;
+  }
+  .voice-output button:hover {
+    background: #0d6efd;
+  }
   .report-image {
     display: block;
     margin: 0 auto 1.1rem auto;
@@ -457,6 +483,13 @@
     }
     .bottom-nav .nav-btn i {
       font-size: 1.5rem;
+    }
+    .voice-output {
+      font-size: 0.97rem;
+    }
+    .voice-output button {
+      font-size: 0.97rem;
+      padding: 0.2rem 0.7rem;
     }
   }
   ::-webkit-scrollbar {
@@ -587,6 +620,13 @@
           <h4>Ringkasan Deteksi</h4>
           <div class="report-summary" id="report-summary">
             Memproses gambar...
+          </div>
+          <!-- Output suara deteksi -->
+          <div class="voice-output" id="voice-output" style="display:none;">
+            <span id="voice-output-text"></span>
+            <button id="voice-output-btn" type="button" title="Putar suara laporan">
+              <i class="bi bi-volume-up"></i> Putar Suara
+            </button>
           </div>
         </div>
         <div class="report-section">
@@ -1160,6 +1200,23 @@
     document.getElementById('detected-image').addEventListener('click', function() {
       openImagePicker();
     });
+
+    // Fungsi output suara deteksi
+    function speakDetectionResult(text) {
+      if (!('speechSynthesis' in window)) {
+        alert('Browser tidak mendukung output suara.');
+        return;
+      }
+      // Stop any previous speech
+      window.speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(text);
+      utter.lang = 'id-ID';
+      utter.rate = 1;
+      utter.pitch = 1;
+      utter.volume = 1;
+      window.speechSynthesis.speak(utter);
+    }
+
     // Proses deteksi pada gambar
     function processImageAndReport(img) {
       const canvas = document.createElement('canvas');
@@ -1191,14 +1248,42 @@
       document.getElementById('jumlah-besar').textContent = besarCount;
       document.getElementById('jumlah-kecil').textContent = kecilCount;
       let summary = '';
+      let voiceText = '';
       if (besarCount + kecilCount === 0) {
         summary = `<span class="text-warning">Tidak ada stroberi terdeteksi pada gambar.</span>`;
+        voiceText = "Tidak ada stroberi terdeteksi pada gambar.";
       } else {
         summary = `Ditemukan <strong>${besarCount + kecilCount}</strong> buah stroberi: 
           <span class="badge bg-success">Besar: ${besarCount}</span> 
           <span class="badge bg-primary text-light">Kecil: ${kecilCount}</span>`;
+        // Buat kalimat suara
+        if (besarCount > 0 && kecilCount > 0) {
+          voiceText = `Ditemukan ${besarCount + kecilCount} buah stroberi. ${besarCount} stroberi besar, dan ${kecilCount} stroberi kecil.`;
+        } else if (besarCount > 0) {
+          voiceText = `Ditemukan ${besarCount} stroberi besar.`;
+        } else if (kecilCount > 0) {
+          voiceText = `Ditemukan ${kecilCount} stroberi kecil.`;
+        }
       }
       document.getElementById('report-summary').innerHTML = summary;
+
+      // Output suara deteksi
+      const voiceOutputDiv = document.getElementById('voice-output');
+      const voiceOutputText = document.getElementById('voice-output-text');
+      const voiceOutputBtn = document.getElementById('voice-output-btn');
+      if (voiceText && voiceText.trim() !== "") {
+        voiceOutputText.textContent = "Laporan suara: " + voiceText;
+        voiceOutputDiv.style.display = "flex";
+        // Otomatis putar suara setiap deteksi baru
+        speakDetectionResult(voiceText);
+        // Tombol play ulang
+        voiceOutputBtn.onclick = function() {
+          speakDetectionResult(voiceText);
+        };
+      } else {
+        voiceOutputDiv.style.display = "none";
+      }
+
       updateChart(besarCount, kecilCount);
       if (besarCount + kecilCount > 0) {
         // Simpan ke laporanHistory, bukan dashboardHistory
