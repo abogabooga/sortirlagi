@@ -1,0 +1,1239 @@
+<!--
+  Tampilan diubah agar menyerupai aplikasi DGW Solution:
+  - Warna utama biru DGW (#0d6efd), aksen hijau (#20c997), dan abu-abu gelap.
+  - Header dan menu bawah sticky, card dengan sudut membulat, shadow lembut.
+  - Ikon menu bawah besar, label di bawah ikon, menu utama di bawah (bottom nav).
+  - Font lebih besar, tombol lebih rounded, nuansa mobile app.
+  - Latar belakang diubah menjadi putih.
+-->
+<style>
+  :root {
+    --primary: #0d6efd;
+    --primary-dark: #0a58ca;
+    --accent: #20c997;
+    --danger: #dc3545;
+    --bg: #ffffff;
+    --card-bg: #fff;
+    --panel-bg: #fff;
+    --border-radius: 1.3rem;
+    --shadow: 0 4px 24px 0 rgba(13,110,253,0.10);
+    --menu-bg: #fff;
+    --menu-active: var(--primary);
+    --menu-inactive: #adb5bd;
+    --gradient: linear-gradient(135deg, #0d6efd 0%, #20c997 100%);
+    --gradient-dark: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #fff !important;
+    color: #232a36;
+    min-height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    font-size: 16px;
+    transition: background 0.5s;
+  }
+  body {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 80px; /* for bottom nav */
+    background: #fff !important;
+  }
+  .main-content {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 1.5rem;
+  }
+  header {
+    padding: 1.2rem 1rem 1rem 1rem;
+    background: var(--gradient);
+    text-align: center;
+    font-weight: 900;
+    font-size: 2.1rem;
+    letter-spacing: 1.2px;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 1.2rem;
+    color: #fff;
+    text-shadow: 0 2px 12px #0d6efd33;
+    border-bottom: 3px solid var(--primary);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .home-container {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 420px;
+    margin: 7vh auto 0 auto;
+    padding: 2.2rem 1.5rem 1.5rem 1.5rem;
+    color: #232a36;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    border: 1.5px solid #e9ecef;
+    animation: fadeInUp 1s;
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
+  }
+  .home-title {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 1.1rem;
+    text-align: center;
+    letter-spacing: 1.5px;
+    text-shadow: 0 2px 12px #0d6efd33;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+  }
+  .home-title img {
+    height: 2.5rem;
+    vertical-align: middle;
+    margin-right: 0.2rem;
+    filter: drop-shadow(0 2px 8px #20c99755);
+  }
+  .home-desc {
+    font-size: 1.15rem;
+    color: #495057;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    letter-spacing: 0.1px;
+  }
+  .home-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 0.5rem;
+  }
+  .home-menu-list li {
+    flex: 1 1 0;
+    background: var(--panel-bg);
+    border-radius: 1.1rem;
+    box-shadow: 0 2px 12px #0d6efd11;
+    border: 2px solid transparent;
+    transition: background 0.22s, border 0.22s, transform 0.18s;
+    text-align: center;
+  }
+  .home-menu-list li:active,
+  .home-menu-list li:hover,
+  .home-menu-link.active {
+    background: #e7f1ff;
+    border: 2px solid var(--primary);
+    transform: scale(1.04);
+  }
+  .home-menu-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #232a36;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.13rem;
+    padding: 1.1rem 0.2rem 0.7rem 0.2rem;
+    transition: color 0.2s;
+    letter-spacing: 0.2px;
+    gap: 0.3rem;
+  }
+  .home-menu-link i {
+    font-size: 2.1rem;
+    margin-bottom: 0.2rem;
+    color: var(--primary);
+    text-shadow: 0 2px 8px #0d6efd33;
+    transition: color 0.2s;
+  }
+  .home-menu-link.active, .home-menu-link:focus {
+    color: var(--accent);
+  }
+  .home-menu-link:active i, .home-menu-link.active i {
+    color: var(--accent);
+  }
+  .home-menu-link:hover {
+    color: var(--primary);
+  }
+  .home-menu-link:hover i {
+    color: var(--accent);
+  }
+  .home-menu-link span {
+    font-size: 1rem;
+    margin-top: 0.1rem;
+  }
+  .home-tips {
+    font-size: 1.01rem;
+    color: #6c757d;
+    background: #fff;
+    border-radius: 0.7rem;
+    padding: 0.7rem 1rem;
+    margin-top: 0.5rem;
+    border-left: 4px solid var(--primary);
+    text-align: left;
+    box-shadow: 0 1px 6px #0d6efd11;
+  }
+  .bottom-nav {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    width: 100vw;
+    background: var(--menu-bg);
+    box-shadow: 0 -2px 16px #0d6efd22;
+    border-top: 2px solid var(--primary);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 68px;
+    padding: 0 0.5rem;
+    user-select: none;
+  }
+  .bottom-nav .nav-btn {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--menu-inactive);
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.3rem 0 0.1rem 0;
+    border: none;
+    background: none;
+    transition: color 0.18s;
+    outline: none;
+  }
+  .bottom-nav .nav-btn.active,
+  .bottom-nav .nav-btn:focus,
+  .bottom-nav .nav-btn:hover {
+    color: var(--menu-active);
+  }
+  .bottom-nav .nav-btn i {
+    font-size: 2.1rem;
+    margin-bottom: 0.1rem;
+    display: block;
+  }
+  .laporan-card, .report-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem 1.1rem 1.1rem 1.1rem;
+    max-width: 98vw;
+    width: 100%;
+    margin: 1.2rem auto 1.2rem auto;
+    color: #232a36;
+    position: relative;
+    z-index: 2;
+    border: 1.5px solid #e9ecef;
+    animation: fadeInUp 1s;
+  }
+  .laporan-title, .report-title {
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 1.1rem;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 12px #0d6efd33;
+  }
+  .laporan-section, .report-section {
+    margin-bottom: 1.1rem;
+  }
+  .laporan-metric {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1.1rem;
+    gap: 1.1rem;
+    flex-wrap: wrap;
+  }
+  .laporan-metric .metric-box {
+    background: var(--panel-bg);
+    border-radius: 1.1rem;
+    padding: 1.1rem 1.1rem;
+    text-align: center;
+    min-width: 110px;
+    box-shadow: 0 2px 12px #0d6efd11;
+    border: 1.5px solid #e9ecef;
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .laporan-metric .metric-box:hover {
+    transform: scale(1.04) translateY(-2px);
+    box-shadow: 0 4px 24px #0d6efd33;
+    border: 1.5px solid var(--primary);
+  }
+  .laporan-metric .metric-label {
+    font-size: 1.09rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.2px;
+  }
+  .laporan-metric .metric-value {
+    font-size: 2.1rem;
+    font-weight: 900;
+    color: #232a36;
+    text-shadow: 0 2px 12px #0d6efd33;
+  }
+  .laporan-history-table, .report-table {
+    width: 100%;
+    background: #fff;
+    border-radius: 0.9rem;
+    overflow: hidden;
+    margin-bottom: 1.1rem;
+    border: 1.5px solid #e9ecef;
+    box-shadow: 0 1px 6px #0d6efd11;
+  }
+  .laporan-history-table th, .laporan-history-table td,
+  .report-table th, .report-table td {
+    padding: 0.7rem 0.7rem;
+    text-align: center;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 1.01rem;
+    color: #232a36;
+    background: #fff;
+  }
+  .laporan-history-table th, .report-table th {
+    background: #fff;
+    color: var(--primary);
+    font-weight: 900;
+    letter-spacing: 0.2px;
+  }
+  .laporan-history-table tr:last-child td,
+  .report-table tr:last-child td {
+    border-bottom: none;
+  }
+  .laporan-chart-container, .report-chart-container {
+    margin: 1.1rem auto 1.1rem auto;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 0.9rem;
+    padding: 1.1rem 0.7rem;
+    box-shadow: 0 2px 12px #0d6efd11;
+    border: 1.5px solid #e9ecef;
+  }
+  .laporan-btn, .camera-btn {
+    display: block;
+    margin: 0 auto 1.1rem auto;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 900;
+    border: none;
+    border-radius: 1.2rem;
+    padding: 0.9rem 2.1rem;
+    font-size: 1.13rem;
+    box-shadow: 0 2px 12px #0d6efd22;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    letter-spacing: 0.2px;
+  }
+  .laporan-btn:hover, .camera-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 24px #20c99733;
+  }
+  .report-summary {
+    background: #fff;
+    border-radius: 0.7rem;
+    padding: 1.1rem 1.3rem;
+    font-size: 1.09rem;
+    margin-bottom: 1.1rem;
+    color: #232a36;
+    box-shadow: 0 2px 12px #0d6efd11;
+    border-left: 4px solid var(--primary);
+    text-align: left;
+  }
+  .report-summary strong {
+    color: var(--primary);
+  }
+  .report-image {
+    display: block;
+    margin: 0 auto 1.1rem auto;
+    max-width: 100%;
+    border-radius: 0.9rem;
+    box-shadow: 0 0 24px 0 #20c99733;
+    border: 2.5px solid var(--primary);
+    background: #fff;
+    cursor: pointer;
+    transition: box-shadow 0.22s, border 0.22s, transform 0.18s;
+  }
+  .report-image:hover {
+    box-shadow: 0 0 40px 0 #0d6efd99;
+    border: 3px solid var(--accent);
+    transform: scale(1.03);
+  }
+  .report-section ul {
+    padding-left: 1.2rem;
+    color: #6c757d;
+    font-size: 1.01rem;
+    margin-bottom: 0;
+  }
+  .report-section ul li {
+    margin-bottom: 0.4rem;
+    line-height: 1.5;
+  }
+  .camera-section {
+    margin: 1.1rem auto 1.1rem auto;
+    max-width: 420px;
+    background: #fff;
+    border-radius: 0.9rem;
+    padding: 1.1rem 0.7rem;
+    box-shadow: 0 2px 12px #0d6efd11;
+    text-align: center;
+    border: 1.5px solid #e9ecef;
+    animation: fadeInUp 1s;
+  }
+  .camera-section h4 {
+    color: var(--primary);
+    font-weight: 900;
+    font-size: 1.13rem;
+    margin-bottom: 1.1rem;
+    letter-spacing: 0.2px;
+  }
+  .camera-video {
+    width: 100%;
+    max-width: 370px;
+    border-radius: 0.9rem;
+    margin-bottom: 1.1rem;
+    background: #000;
+    border: 2.5px solid var(--primary);
+    box-shadow: 0 0 24px 0 #20c99733;
+    transition: box-shadow 0.22s, border 0.22s;
+  }
+  .camera-video:focus {
+    outline: 2px solid var(--accent);
+  }
+  #camera-status {
+    color: #232a36;
+    margin-top: 0.7rem;
+    font-size: 1.01rem;
+    background: #fff;
+    border-radius: 0.7rem;
+    padding: 0.5rem 1rem;
+    border-left: 4px solid var(--primary);
+    text-align: left;
+    box-shadow: 0 1px 6px #0d6efd11;
+    display: inline-block;
+  }
+  @media (max-width: 600px) {
+    .home-container, .laporan-card, .report-card, .camera-section {
+      max-width: 99vw;
+      padding: 1.1rem 0.3rem 1rem 0.3rem;
+    }
+    .laporan-chart-container, .report-chart-container {
+      max-width: 99vw;
+      padding: 0.5rem 0.1rem;
+    }
+    .laporan-metric .metric-box {
+      min-width: 80px;
+      padding: 0.7rem 0.5rem;
+    }
+    .report-table th, .report-table td,
+    .laporan-history-table th, .laporan-history-table td {
+      padding: 0.5rem 0.3rem;
+      font-size: 0.97rem;
+    }
+    .camera-video {
+      max-width: 99vw;
+    }
+    header {
+      font-size: 1.3rem;
+      padding: 1rem 0.3rem 0.7rem 0.3rem;
+    }
+    .home-title {
+      font-size: 1.3rem;
+      gap: 0.3rem;
+    }
+    .home-menu-link {
+      font-size: 0.97rem;
+      padding: 0.7rem 0.1rem 0.5rem 0.1rem;
+    }
+    .bottom-nav {
+      height: 60px;
+    }
+    .bottom-nav .nav-btn i {
+      font-size: 1.5rem;
+    }
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+    background: #fff;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 8px;
+  }
+  ::selection {
+    background: var(--primary);
+    color: #fff;
+  }
+</style>
+</head>
+<body>
+<!-- HOME SECTION -->
+<div id="home-section" style="display:block;">
+  <div class="home-container shadow-lg border border-light-subtle mb-4">
+    <div class="home-title">
+      SENSOR SORTIR BUAH STRAWBERRY 
+    </div>
+    <div class="home-desc">
+      Selamat datang di aplikasi <b></b>
+      <br>
+      <img src="UPI _YPTK_ PADANG.jpg" alt="Logo UPI YPTK" style="height:100px;width:auto;vertical-align:middle;margin-left:0.3rem;margin-bottom:0.2rem;"><br>
+      AGAN FEBRA TAMA <br>
+      22101152610418<br>
+    </div>
+    <ul class="home-menu-list">
+      <li>
+        <a class="home-menu-link" href="#" id="home-laporan-link">
+          <i class="bi bi-speedometer2"></i>
+          <span>Laporan</span>
+        </a>
+      </li>
+      <li>
+        <a class="home-menu-link" href="#" id="home-deteksi-link">
+          <i class="bi bi-graph-up"></i>
+          <span>Deteksi</span>
+        </a>
+      </li>
+      <li>
+        <a class="home-menu-link" href="#" id="home-camera-link">
+          <i class="bi bi-camera-video"></i>
+          <span>Kamera</span>
+        </a>
+      </li>
+    </ul>
+    <div class="home-tips">
+      <b>Tips:</b> Untuk deteksi gambar, klik menu <b>"Deteksi"</b> lalu pilih gambar stroberi.<br>
+      Untuk deteksi real-time, gunakan menu <b>"Kamera"</b>.
+    </div>
+  </div>
+</div>
+<!-- END HOME SECTION -->
+
+<!-- LAPORAN & MENU UTAMA -->
+<div id="app-section" style="display:none;">
+  <header>
+    <img src="https://img.icons8.com/color/48/000000/strawberry.png" alt="Logo" style="height:2.1rem;vertical-align:middle;margin-right:0.5rem;">
+    <span class="fs-3 fw-bold">SORTIR BUAH STRAWBERRY IOT</span>
+  </header>
+  <div class="main-content container py-2">
+    <!-- MENU KONTEN UTAMA -->
+    <div id="laporan-menu" class="menu-section">
+      <!-- LAPORAN -->
+      <div class="laporan-card shadow-lg border border-light-subtle mb-4">
+        <div class="laporan-title">Laporan Deteksi Stroberi</div>
+        <div class="laporan-section laporan-metric" id="laporan-metric">
+          <div class="metric-box">
+            <div class="metric-label">Total Deteksi</div>
+            <div class="metric-value" id="laporan-total">0</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Total Besar</div>
+            <div class="metric-value" id="laporan-besar">0</div>
+          </div>
+          <div class="metric-box">
+            <div class="metric-label">Total Kecil</div>
+            <div class="metric-value" id="laporan-kecil">0</div>
+          </div>
+        </div>
+        <div class="laporan-section">
+          <button class="laporan-btn" id="laporan-clear">Reset Riwayat</button>
+        </div>
+        <div class="laporan-section">
+          <h5 class="text-primary mb-2" style="font-size:1.1rem;">Riwayat Deteksi Terakhir</h5>
+          <div style="overflow-x:auto;">
+            <table class="laporan-history-table table table-bordered mb-0">
+              <thead>
+                <tr>
+                  <th>No</th>
+                  <th>Waktu</th>
+                  <th>Besar</th>
+                  <th>Kecil</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody id="laporan-history">
+                <tr>
+                  <td colspan="5" class="text-center text-secondary">Belum ada data deteksi.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="laporan-section">
+          <h5 class="text-primary mb-2" style="font-size:1.1rem;">Grafik Total Deteksi</h5>
+          <div class="laporan-chart-container">
+            <canvas id="laporan-chart" width="350" height="180"></canvas>
+          </div>
+        </div>
+      </div>
+      <!-- END LAPORAN -->
+    </div>
+
+    <div id="deteksi-menu" class="menu-section" style="display:none;">
+      <!-- HASIL DETEKSI GAMBAR STROBERI -->
+      <div class="report-card shadow-lg border border-light-subtle">
+        <div class="report-title">Hasil Deteksi Gambar Stroberi</div>
+        <div class="report-section">
+          <h4>Gambar yang Dideteksi</h4>
+          <img id="detected-image" class="report-image" src="" alt="Gambar Hasil Deteksi Stroberi" title="Klik untuk ganti gambar">
+        </div>
+        <div class="report-section">
+          <h4>Ringkasan Deteksi</h4>
+          <div class="report-summary" id="report-summary">
+            Memproses gambar...
+          </div>
+        </div>
+        <div class="report-section">
+          <h4>Detail Jumlah Stroberi</h4>
+          <table class="report-table table table-bordered">
+            <thead>
+              <tr>
+                <th>Ukuran</th>
+                <th>Jumlah</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Besar</td>
+                <td id="jumlah-besar">0</td>
+              </tr>
+              <tr>
+                <td>Kecil</td>
+                <td id="jumlah-kecil">0</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="report-section">
+          <h4>Grafik Deteksi</h4>
+          <div class="report-chart-container">
+            <canvas id="chart-strawberry" width="320" height="180"></canvas>
+          </div>
+        </div>
+        <div class="report-section">
+          <h4>Keterangan</h4>
+          <ul>
+            <li>Deteksi dilakukan berdasarkan warna merah pada gambar stroberi.</li>
+            <li>Klasifikasi otomatis menjadi <b>Besar</b> atau <b>Kecil</b> berdasarkan area merah.</li>
+            <li>Gunakan gambar dengan pencahayaan cukup untuk hasil terbaik.</li>
+            <li>Anda dapat menggunakan sensor kamera untuk deteksi langsung buah sesuai ukuran seperti awal (real-time).</li>
+          </ul>
+        </div>
+      </div>
+      <!-- END HASIL DETEKSI -->
+    </div>
+
+    <div id="camera-menu" class="menu-section" style="display:none;">
+      <!-- CAMERA SENSOR SECTION -->
+      <div class="camera-section">
+        <h4>Sensor Kamera Deteksi Langsung</h4>
+        <video id="camera-video" class="camera-video" autoplay playsinline></video>
+        <br>
+        <button class="camera-btn" id="camera-capture">Ambil Gambar dari Kamera</button>
+        <div id="camera-status"></div>
+      </div>
+      <!-- END CAMERA SENSOR SECTION -->
+    </div>
+  </div>
+  <!-- BOTTOM NAVIGATION ala DGW -->
+  <nav class="bottom-nav">
+    <button class="nav-btn active" id="nav-laporan" type="button">
+      <i class="bi bi-speedometer2"></i>
+      <span>Laporan</span>
+    </button>
+    <button class="nav-btn" id="nav-deteksi" type="button">
+      <i class="bi bi-graph-up"></i>
+      <span>Deteksi</span>
+    </button>
+    <button class="nav-btn" id="nav-camera" type="button">
+      <i class="bi bi-camera-video"></i>
+      <span>Kamera</span>
+    </button>
+    <button class="nav-btn" id="nav-home" type="button">
+      <i class="bi bi-house-door"></i>
+      <span>Home</span>
+    </button>
+  </nav>
+</div>
+<!-- Bootstrap Icons CDN for menu icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-gradient@0.5.0/dist/chartjs-plugin-gradient.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0"></script>
+<script>
+  // --- APP LOGIC (LAPORAN, DETEKSI, KAMERA, HOME) ---
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('home-section').style.display = 'block';
+    document.getElementById('app-section').style.display = 'none';
+    initApp();
+  });
+
+  function initApp() {
+    // --- LOGIKA DETEKSI GAMBAR DAN PENGISIAN LAPORAN ---
+    const PIXEL_COUNT_THRESHOLD_BIG = 3500;
+    const PIXEL_COUNT_THRESHOLD_SMALL_MIN = 500;
+
+    function rgbToHsv(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      let max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, v = max;
+      let d = max - min;
+      s = max === 0 ? 0 : d / max;
+      if (max === min) {
+        h = 0;
+      } else {
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+      }
+      return [h * 360, s, v];
+    }
+    function isRedPixel(r, g, b) {
+      const [h, s, v] = rgbToHsv(r, g, b);
+      const isRedHue = (h >= 340 || h <= 20);
+      const isSaturated = s > 0.45;
+      const isBright = v > 0.25;
+      const ratio = (g + b) > 0 ? r / ((g + b) / 2) : 2;
+      return (
+        isRedHue &&
+        isSaturated &&
+        isBright &&
+        r > 70 &&
+        ratio > 1.7
+      );
+    }
+    function getIndex(x, y, width) {
+      return y * width + x;
+    }
+    function floodFill(x, y, data, visited, width, height) {
+      const stack = [[x, y]];
+      const pixels = [];
+      while (stack.length > 0) {
+        const [cx, cy] = stack.pop();
+        if (cx < 0 || cy < 0 || cx >= width || cy >= height) continue;
+        const idx = getIndex(cx, cy, width);
+        if (visited[idx]) continue;
+        const i = idx * 4;
+        const r = data[i], g = data[i + 1], b = data[i + 2];
+        if (isRedPixel(r, g, b)) {
+          visited[idx] = 1;
+          pixels.push([cx, cy]);
+          stack.push([cx + 1, cy]);
+          stack.push([cx - 1, cy]);
+          stack.push([cx, cy + 1]);
+          stack.push([cx, cy - 1]);
+        }
+      }
+      return pixels;
+    }
+    function findRedBlobs(imageData) {
+      const { data, width, height } = imageData;
+      const visited = new Uint8Array(width * height);
+      const blobs = [];
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          const idx = getIndex(x, y, width);
+          if (visited[idx]) continue;
+          const i = idx * 4;
+          const r = data[i], g = data[i + 1], b = data[i + 2];
+          if (isRedPixel(r, g, b)) {
+            const blobPixels = floodFill(x, y, data, visited, width, height);
+            if (blobPixels.length > PIXEL_COUNT_THRESHOLD_SMALL_MIN) {
+              blobs.push(blobPixels);
+            }
+          }
+        }
+      }
+      return blobs;
+    }
+    function getBoundingBox(points) {
+      let minX = points[0][0];
+      let maxX = points[0][0];
+      let minY = points[0][1];
+      let maxY = points[0][1];
+      points.forEach(([x, y]) => {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      });
+      return { minX, maxX, minY, maxY, width: maxX - minX, height: maxY - minY };
+    }
+    function drawBoundingBox(ctx, box, label) {
+      ctx.strokeStyle = label === 'Besar' ? '#20c997' : '#0d6efd';
+      ctx.lineWidth = 3;
+      ctx.fillStyle = label === 'Besar' ? '#20c997' : '#0d6efd';
+      ctx.font = 'bold 15px Montserrat, Segoe UI';
+      ctx.lineJoin = 'round';
+      ctx.strokeRect(box.minX, box.minY, box.width, box.height);
+      const textWidth = ctx.measureText(label).width;
+      ctx.save();
+      ctx.globalAlpha = 0.85;
+      ctx.fillRect(box.minX, box.minY - 20, textWidth + 10, 18);
+      ctx.restore();
+      ctx.fillStyle = '#fff';
+      ctx.fillText(label, box.minX + 5, box.minY - 7);
+    }
+    // Inisialisasi chart
+    let chartStrawberry = null;
+    function updateChart(besar, kecil) {
+      if (!chartStrawberry) return;
+      chartStrawberry.data.datasets[0].data = [besar, kecil];
+      chartStrawberry.update();
+    }
+    function initChart() {
+      const ctxChart = document.getElementById('chart-strawberry').getContext('2d');
+      chartStrawberry = new Chart(ctxChart, {
+        type: 'doughnut',
+        data: {
+          labels: ['Besar', 'Kecil'],
+          datasets: [{
+            label: 'Jumlah Stroberi',
+            data: [0, 0],
+            backgroundColor: [
+              // Gradient for "Besar"
+              function(context) {
+                const chart = context.chart;
+                const {ctx, chartArea} = chart;
+                if (!chartArea) return '#20c997';
+                let gradient = ctx.createLinearGradient(chartArea.left, chartArea.top, chartArea.right, chartArea.bottom);
+                gradient.addColorStop(0, '#43e97b');
+                gradient.addColorStop(1, '#38f9d7');
+                return gradient;
+              },
+              // Gradient for "Kecil"
+              function(context) {
+                const chart = context.chart;
+                const {ctx, chartArea} = chart;
+                if (!chartArea) return '#0d6efd';
+                let gradient = ctx.createLinearGradient(chartArea.left, chartArea.bottom, chartArea.right, chartArea.top);
+                gradient.addColorStop(0, '#0d6efd');
+                gradient.addColorStop(1, '#b721ff');
+                return gradient;
+              }
+            ],
+            borderColor: ['#20c997', '#0d6efd'],
+            borderWidth: 3,
+            hoverBorderWidth: 5,
+            hoverBorderColor: ['#43e97b', '#b721ff']
+          }]
+        },
+        options: {
+          responsive: true,
+          cutout: '65%',
+          plugins: {
+            legend: { 
+              display: true,
+              position: 'bottom',
+              labels: {
+                color: '#232a36',
+                font: { weight: 'bold', size: 16 },
+                padding: 20,
+                boxWidth: 24
+              }
+            },
+            datalabels: {
+              color: '#fff',
+              font: { weight: 'bold', size: 18 },
+              formatter: function(value, context) {
+                if (value === 0) return '';
+                return value;
+              },
+              backgroundColor: function(context) {
+                return context.dataset.backgroundColor[context.dataIndex];
+              },
+              borderRadius: 8,
+              padding: 8,
+              display: function(context) {
+                return context.dataset.data[context.dataIndex] > 0;
+              }
+            },
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: function(context) {
+                  return `${context.label}: ${context.parsed}`;
+                }
+              }
+            },
+            title: { display: false }
+          },
+          animation: {
+            animateRotate: true,
+            animateScale: true,
+            duration: 1200,
+            easing: 'easeOutElastic'
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+    }
+    // --- LAPORAN LOGIC ---
+    let laporanChart = null;
+    function initLaporanChart() {
+      const ctx = document.getElementById('laporan-chart').getContext('2d');
+      laporanChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: [],
+          datasets: [
+            {
+              label: 'Besar',
+              data: [],
+              borderRadius: 16,
+              maxBarThickness: 36,
+              backgroundColor: function(context) {
+                const chart = context.chart;
+                const {ctx, chartArea} = chart;
+                if (!chartArea) return '#20c997';
+                let gradient = ctx.createLinearGradient(chartArea.left, chartArea.top, chartArea.right, chartArea.bottom);
+                gradient.addColorStop(0, '#43e97b');
+                gradient.addColorStop(1, '#38f9d7');
+                return gradient;
+              },
+              borderWidth: 2,
+              borderColor: '#20c997',
+              hoverBackgroundColor: '#20c997cc'
+            },
+            {
+              label: 'Kecil',
+              data: [],
+              borderRadius: 16,
+              maxBarThickness: 36,
+              backgroundColor: function(context) {
+                const chart = context.chart;
+                const {ctx, chartArea} = chart;
+                if (!chartArea) return '#0d6efd';
+                let gradient = ctx.createLinearGradient(chartArea.left, chartArea.bottom, chartArea.right, chartArea.top);
+                gradient.addColorStop(0, '#0d6efd');
+                gradient.addColorStop(1, '#b721ff');
+                return gradient;
+              },
+              borderWidth: 2,
+              borderColor: '#0d6efd',
+              hoverBackgroundColor: '#0d6efdcc'
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top',
+              labels: { color: '#232a36', font: { weight: 'bold', size: 15 } }
+            },
+            datalabels: {
+              anchor: 'end',
+              align: 'top',
+              color: '#232a36',
+              font: { weight: 'bold', size: 15 },
+              formatter: function(value) {
+                return value > 0 ? value : '';
+              }
+            },
+            tooltip: {
+              enabled: true,
+              callbacks: {
+                label: function(context) {
+                  return `${context.dataset.label}: ${context.parsed.y}`;
+                }
+              }
+            },
+            title: { display: false }
+          },
+          animation: {
+            duration: 1200,
+            easing: 'easeOutBounce'
+          },
+          scales: {
+            x: {
+              ticks: { color: '#232a36', font: { weight: 'bold', size: 13 } },
+              grid: { color: 'rgba(0,0,0,0.08)' }
+            },
+            y: {
+              beginAtZero: true,
+              ticks: { color: '#232a36', font: { weight: 'bold', size: 13 } },
+              grid: { color: 'rgba(0,0,0,0.08)' }
+            }
+          }
+        },
+        plugins: [ChartDataLabels]
+      });
+    }
+    function getLaporanHistory() {
+      let data = [];
+      try {
+        data = JSON.parse(localStorage.getItem('laporanHistory') || '[]');
+      } catch (e) { data = []; }
+      return Array.isArray(data) ? data : [];
+    }
+    function setLaporanHistory(data) {
+      localStorage.setItem('laporanHistory', JSON.stringify(data));
+    }
+    function addLaporanHistory(entry) {
+      let data = getLaporanHistory();
+      data.unshift(entry);
+      if (data.length > 10) data = data.slice(0, 10);
+      setLaporanHistory(data);
+    }
+    function clearLaporanHistory() {
+      localStorage.removeItem('laporanHistory');
+    }
+    function updateLaporan() {
+      const data = getLaporanHistory();
+      // Update metrics
+      let total = 0, besar = 0, kecil = 0;
+      data.forEach(d => {
+        besar += d.besar;
+        kecil += d.kecil;
+        total += d.besar + d.kecil;
+      });
+      document.getElementById('laporan-total').textContent = total;
+      document.getElementById('laporan-besar').textContent = besar;
+      document.getElementById('laporan-kecil').textContent = kecil;
+      // Update history table
+      const tbody = document.getElementById('laporan-history');
+      tbody.innerHTML = '';
+      if (data.length === 0) {
+        tbody.innerHTML = `<tr>
+          <td colspan="5" class="text-center text-secondary">Belum ada data deteksi.</td>
+        </tr>`;
+      } else {
+        data.forEach((d, i) => {
+          const t = new Date(d.time);
+          const waktu = t.toLocaleString('id-ID', { hour12: false });
+          tbody.innerHTML += `<tr>
+            <td>${data.length - i}</td>
+            <td>${waktu}</td>
+            <td><span class="badge bg-success">${d.besar}</span></td>
+            <td><span class="badge bg-primary text-light">${d.kecil}</span></td>
+            <td><b>${d.besar + d.kecil}</b></td>
+          </tr>`;
+        });
+      }
+      // Update laporan chart
+      if (laporanChart) {
+        laporanChart.data.labels = data.map((d, i) => {
+          const t = new Date(d.time);
+          return t.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }).reverse();
+        laporanChart.data.datasets[0].data = data.map(d => d.besar).reverse();
+        laporanChart.data.datasets[1].data = data.map(d => d.kecil).reverse();
+        laporanChart.update();
+      }
+    }
+    // --- MENU NAVIGATION LOGIC ---
+    function showMenuSection(sectionId) {
+      document.querySelectorAll('.menu-section').forEach(function(sec) {
+        sec.style.display = 'none';
+      });
+      var el = document.getElementById(sectionId);
+      if (el) el.style.display = '';
+    }
+    function setActiveMenu(sectionId) {
+      // For bottom nav
+      document.querySelectorAll('.bottom-nav .nav-btn').forEach(l => l.classList.remove('active'));
+      if (sectionId === 'laporan-menu') {
+        document.getElementById('nav-laporan').classList.add('active');
+      } else if (sectionId === 'deteksi-menu') {
+        document.getElementById('nav-deteksi').classList.add('active');
+      } else if (sectionId === 'camera-menu') {
+        document.getElementById('nav-camera').classList.add('active');
+      }
+    }
+    // Inisialisasi chart, laporan, dsb
+    initChart();
+    initLaporanChart();
+    updateLaporan();
+    // Bottom nav logic
+    document.getElementById('nav-laporan').addEventListener('click', function() {
+      showMenuSection('laporan-menu');
+      setActiveMenu('laporan-menu');
+    });
+    document.getElementById('nav-deteksi').addEventListener('click', function() {
+      showMenuSection('deteksi-menu');
+      setActiveMenu('deteksi-menu');
+    });
+    document.getElementById('nav-camera').addEventListener('click', function() {
+      showMenuSection('camera-menu');
+      setActiveMenu('camera-menu');
+    });
+    document.getElementById('nav-home').addEventListener('click', function() {
+      document.getElementById('app-section').style.display = 'none';
+      document.getElementById('home-section').style.display = 'block';
+    });
+    // Home menu logic (from home page)
+    document.getElementById('home-laporan-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('home-section').style.display = 'none';
+      document.getElementById('app-section').style.display = 'block';
+      showMenuSection('laporan-menu');
+      setActiveMenu('laporan-menu');
+    });
+    document.getElementById('home-deteksi-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('home-section').style.display = 'none';
+      document.getElementById('app-section').style.display = 'block';
+      showMenuSection('deteksi-menu');
+      setActiveMenu('deteksi-menu');
+    });
+    document.getElementById('home-camera-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('home-section').style.display = 'none';
+      document.getElementById('app-section').style.display = 'block';
+      showMenuSection('camera-menu');
+      setActiveMenu('camera-menu');
+    });
+    // Show laporan by default (when masuk app-section)
+    showMenuSection('laporan-menu');
+    setActiveMenu('laporan-menu');
+    // Reset laporan
+    document.getElementById('laporan-clear').addEventListener('click', function() {
+      if (confirm('Yakin ingin menghapus seluruh riwayat deteksi?')) {
+        clearLaporanHistory();
+        updateLaporan();
+      }
+    });
+    // Kamera: inisialisasi stream
+    const video = document.getElementById('camera-video');
+    const cameraStatus = document.getElementById('camera-status');
+    let cameraStream = null;
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+        .then(function(stream) {
+          video.srcObject = stream;
+          cameraStream = stream;
+          cameraStatus.textContent = "Kamera aktif. Arahkan ke buah yang ingin dideteksi.";
+        })
+        .catch(function(err) {
+          cameraStatus.textContent = "Tidak dapat mengakses kamera: " + err.message;
+        });
+    } else {
+      cameraStatus.textContent = "Browser tidak mendukung akses kamera.";
+    }
+    // Tombol ambil gambar dari kamera
+    document.getElementById('camera-capture').addEventListener('click', function() {
+      if (!video.srcObject) {
+        cameraStatus.textContent = "Kamera belum aktif.";
+        return;
+      }
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = video.videoWidth;
+      tempCanvas.height = video.videoHeight;
+      const tempCtx = tempCanvas.getContext('2d');
+      tempCtx.drawImage(video, 0, 0, tempCanvas.width, tempCanvas.height);
+      const img = new Image();
+      img.onload = function() {
+        processImageAndReport(img);
+        cameraStatus.textContent = "Gambar dari kamera berhasil diproses.";
+        showMenuSection('deteksi-menu');
+        setActiveMenu('deteksi-menu');
+      };
+      img.src = tempCanvas.toDataURL('image/png');
+    });
+    // Jika hash ada gambar, load otomatis
+    const urlParams = new URLSearchParams(window.location.search);
+    const imgParam = urlParams.get('img');
+    if (imgParam) {
+      document.getElementById('home-section').style.display = 'none';
+      document.getElementById('app-section').style.display = 'block';
+      const img = new Image();
+      img.onload = function() {
+        processImageAndReport(img);
+        showMenuSection('deteksi-menu');
+        setActiveMenu('deteksi-menu');
+      };
+      img.src = imgParam;
+    }
+    // Klik pada gambar untuk ganti gambar
+    document.getElementById('detected-image').addEventListener('click', function() {
+      openImagePicker();
+    });
+    // Proses deteksi pada gambar
+    function processImageAndReport(img) {
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const maxWidth = 400;
+      const maxHeight = 220;
+      let ratio = Math.min(maxWidth / img.width, maxHeight / img.height, 1);
+      canvas.width = img.width * ratio;
+      canvas.height = img.height * ratio;
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      const frame = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const blobs = findRedBlobs(frame);
+      let besarCount = 0;
+      let kecilCount = 0;
+      blobs.forEach(blob => {
+        const pixelCount = blob.length;
+        const box = getBoundingBox(blob);
+        let label = 'Kecil';
+        if (pixelCount > PIXEL_COUNT_THRESHOLD_BIG) {
+          label = 'Besar';
+          besarCount++;
+        } else {
+          label = 'Kecil';
+          kecilCount++;
+        }
+        drawBoundingBox(ctx, box, label);
+      });
+      document.getElementById('detected-image').src = canvas.toDataURL('image/png');
+      document.getElementById('jumlah-besar').textContent = besarCount;
+      document.getElementById('jumlah-kecil').textContent = kecilCount;
+      let summary = '';
+      if (besarCount + kecilCount === 0) {
+        summary = `<span class="text-warning">Tidak ada stroberi terdeteksi pada gambar.</span>`;
+      } else {
+        summary = `Ditemukan <strong>${besarCount + kecilCount}</strong> buah stroberi: 
+          <span class="badge bg-success">Besar: ${besarCount}</span> 
+          <span class="badge bg-primary text-light">Kecil: ${kecilCount}</span>`;
+      }
+      document.getElementById('report-summary').innerHTML = summary;
+      updateChart(besarCount, kecilCount);
+      if (besarCount + kecilCount > 0) {
+        // Simpan ke laporanHistory, bukan dashboardHistory
+        addLaporanHistory({
+          time: Date.now(),
+          besar: besarCount,
+          kecil: kecilCount
+        });
+        updateLaporan();
+      }
+      showMenuSection('deteksi-menu');
+      setActiveMenu('deteksi-menu');
+    }
+    // --- AMBIL GAMBAR DARI USER (UPLOAD) ---
+    function openImagePicker() {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          const img = new Image();
+          img.onload = function() {
+            processImageAndReport(img);
+          };
+          img.src = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      };
+      input.click();
+    }
+  }
+  
+</script>
+</body>
+</html>
